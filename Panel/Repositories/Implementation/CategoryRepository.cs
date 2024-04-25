@@ -1,4 +1,5 @@
-﻿using Panel.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Panel.Data;
 using Panel.Models.Domain;
 using Panel.Repositories.Interface;
 
@@ -19,6 +20,11 @@ namespace Panel.Repositories.Implementation
             await _db.SaveChangesAsync();
 
             return category;
+        }
+
+        public async Task<IEnumerable<Category>> GetAllAsync()
+        {
+            return await _db.Categories.ToListAsync();
         }
     }
 }
