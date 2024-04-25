@@ -26,5 +26,23 @@ namespace Panel.Repositories.Implementation
         {
             return await _db.Categories.ToListAsync();
         }
+
+        public async Task<Category?> GetById(Guid id)
+        {
+            return await _db.Categories.FirstOrDefaultAsync(c => c.Id == id);
+        }
+
+        public async Task<Category> UpdateAsync(Category category)
+        {
+            var existingCategory = await _db.Categories.FirstOrDefaultAsync(c => c.Id == category.Id);
+
+            if (existingCategory != null)
+            {
+                _db.Entry(existingCategory).CurrentValues.SetValues(category);
+                await _db.SaveChangesAsync();
+                return category;
+            }
+            return null;
+        }
     }
 }
