@@ -22,6 +22,18 @@ namespace Panel.Repositories.Implementation
             return category;
         }
 
+        public async Task<Category?> DeleteAsync(Guid id)
+        {
+            var existingCategory = await _db.Categories.FirstOrDefaultAsync(l => l.Id == id);
+            if (existingCategory is null)
+            { 
+              return null;
+            }
+            _db.Categories.Remove(existingCategory);
+            await _db.SaveChangesAsync();
+            return existingCategory;
+        }
+
         public async Task<IEnumerable<Category>> GetAllAsync()
         {
             return await _db.Categories.ToListAsync();

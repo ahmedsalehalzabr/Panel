@@ -12,5 +12,9 @@ namespace Panel.Repositories.Interface
 
         Task<Category> UpdateAsync(Category category);
 
+        Task<Category?> DeleteAsync(Guid id);
+
+        
+
     }
 }
