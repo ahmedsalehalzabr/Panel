@@ -1,6 +1,6 @@
-﻿namespace Panel.Models.Domain
+﻿namespace Panel.Models.DTO
 {
-    public class BlogPost
+    public class BlogPostDto
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
@@ -12,6 +12,6 @@
         public string Author { get; set; }
         public bool IsVisible { get; set; }
 
-        public ICollection<Category> Categories { get; set; }
+        public List<CategoryDTO> Categories { get; set; } = new List<CategoryDTO>();
     }
 }

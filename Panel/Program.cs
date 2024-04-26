@@ -16,6 +16,8 @@ builder.Services.AddDbContext<AppDbContext>(op =>
       op.UseSqlServer(builder.Configuration.GetConnectionString("myCon")));
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
