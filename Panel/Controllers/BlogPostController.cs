@@ -202,5 +202,30 @@ namespace Panel.Controllers
 
         }
 
+        [HttpDelete]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> DeleteBlogPost([FromRoute] Guid id)
+        {
+            var deleteBlogPost = await blogPostRepository.DeleteAsync(id);  
+
+            if (deleteBlogPost == null) {  return NotFound(); }
+
+            //convert Domain model to DTO
+            var response = new BlogPostDto
+            {
+                Id = deleteBlogPost.Id,
+                Title = deleteBlogPost.Title,
+                Author = deleteBlogPost.Author,
+                Content = deleteBlogPost.Content,
+                PublishedDate = deleteBlogPost.PublishedDate,
+                ShortDescription = deleteBlogPost.ShortDescription,
+                UrlHandle = deleteBlogPost.UrlHandle,
+                IsVisible = deleteBlogPost.IsVisible,
+                FeaturedImageUrl=deleteBlogPost.FeaturedImageUrl,
+            };
+            return Ok(response);
+
+        }
+
     }
 }

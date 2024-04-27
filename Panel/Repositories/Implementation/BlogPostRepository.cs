@@ -20,6 +20,18 @@ namespace Panel.Repositories.Implementation
             return blogPost;
         }
 
+        public async Task<BlogPost?> DeleteAsync(Guid id)
+        {
+            var existingBlogPost = await _db.BlogPosts.FirstOrDefaultAsync(x => x.Id == id);
+            if (existingBlogPost != null)
+            {
+                _db.BlogPosts.Remove(existingBlogPost);
+                await _db.SaveChangesAsync();
+                return existingBlogPost;
+            }
+            return null;
+        }
+
         public async Task<IEnumerable<BlogPost>> GetAllAsync()
         {
             return await _db.BlogPosts.Include(x => x.Categories).ToListAsync();
