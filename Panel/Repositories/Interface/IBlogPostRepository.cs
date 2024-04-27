@@ -9,6 +9,7 @@ namespace Panel.Repositories.Interface
         Task<IEnumerable<BlogPost>> GetAllAsync();
 
         Task<BlogPost?> GetByIdAsync(Guid id); 
+        Task<BlogPost?> GetByIdHandleAsync(string urlHandle);
 
         Task<BlogPost?> UpdateAsync(BlogPost blogPost);
 
